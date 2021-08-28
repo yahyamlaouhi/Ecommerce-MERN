@@ -24,7 +24,7 @@ class Products extends Component {
                                     {`$`+product.price}
                                 </div>
                                 
-                                <button className={classNames("primary","button")} >
+                                <button onClick={()=>this.props.addToCart(product)} className={classNames("primary","button")} >
                                     Add to Cart
                                 </button>
                                 </div>
