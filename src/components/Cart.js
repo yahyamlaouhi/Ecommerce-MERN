@@ -1,7 +1,34 @@
 import React, { Component } from 'react'
 
 export class Cart extends Component {
+    constructor(props) {
+        super(props)
+    
+        this.state = {
+            name:"",
+            adress:"",
+            email:"",
+            showCheckout:false
+
+        }
+    }
+    handelInput=(e)=>{
+        this.setState({[e.target.name]:e.target.value})
+      }
+    createOrder=(e)=>{
+        e.preventDefault()
+        const order={
+            name:this.state.name,
+            email:this.state.email,
+            adress:this.state.adress,
+            cartItems:this.state.cartItems,
+        }
+        this.props.createOrder(order)
+
+    }
+    
     render() {
+        
         const {cartItems}=this.props
         return (
             <div>
@@ -28,7 +55,7 @@ export class Cart extends Component {
                          </ul>
 
                      </div>
-                     <div>
+                     <div className="cart">
                          {cartItems.length!==0 && (<div>
                              <div className="cart">
                                  <div className="total"> 
@@ -37,15 +64,64 @@ export class Cart extends Component {
                                          cartItems.reduce((a,c)=>a+c.price * c.count,0)
                                      }
                                      </div>
-                                     <button className="button primary">Proceed</button>
+                                     
+                                     <button onClick={()=>{this.setState({showCheckout:true})}} className="button primary">Proceed</button>
                                  </div>
-                             </div>
-                         </div>)}
-                     </div>
-                 </div>
-            </div>
-        )
-    }
-}
+                         
+                             </div> 
+                             </div>)}
+                        </div>
+                </div>
+                <div>
+                
+                    {this.state.showCheckout && (<div className="cart">
+                        <form onSubmit={this.createOrder}>
+                            <ul className="form-container" >
+                                <li>
+                                    <label>Email</label>
+                                    <input name="email"
+                                    type="email"
+                                    required
+                                    onChange={this.handelInput}/>
 
-export default Cart
+                                </li>
+                                <li>
+                                    <label>Name</label>
+                                    <input name="name"
+                                    type="text"
+                                    required
+                                    onChange={this.handelInput}/>
+
+                                </li>
+                                <li>
+                                    <label>Adress</label>
+                                    <input name="adress"
+                                    type="text"
+                                    required
+                                    onChange={this.handelInput}/>
+
+                                </li>
+                                <button createOrder={this.createOrder} className="button primary" type="submit">
+                                    Checkout 
+                                </button>
+                            </ul>
+                        </form>
+                             </div> ) }
+                </div>
+                    
+                </div>
+            
+                         
+                   
+                             
+               
+              
+
+                   
+            
+        )
+    
+    } } 
+                                    
+
+export default Cart;
