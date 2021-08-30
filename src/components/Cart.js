@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import Fade from "react-reveal/Fade"
 
 export class Cart extends Component {
     constructor(props) {
@@ -36,6 +37,7 @@ export class Cart extends Component {
                 (<div className="cart cart-header">You Have {cartItems.length} in the cart{""}</div>)}
                  <div>
                      <div className="cart">
+                         <Fade left cascade>
                          <ul className="cart-items">
                            {cartItems.map(item=>(
                                <li key={item._id}>
@@ -53,7 +55,7 @@ export class Cart extends Component {
                                </li>
                            ))}
                          </ul>
-
+                         </Fade>
                      </div>
                      <div className="cart">
                          {cartItems.length!==0 && (<div>
@@ -72,6 +74,7 @@ export class Cart extends Component {
                              </div>)}
                         </div>
                 </div>
+                <Fade right cascade>
                 <div>
                 
                     {this.state.showCheckout && (<div className="cart">
@@ -108,7 +111,7 @@ export class Cart extends Component {
                         </form>
                              </div> ) }
                 </div>
-                    
+                </Fade>
                 </div>
             
                          
